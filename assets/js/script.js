@@ -5,6 +5,7 @@ var temp = document.querySelector("#temp")
 var wind = document.querySelector("#wind")
 var humidity = document.querySelector("#humidity")
 var uvi = document.querySelector("#uvi")
+var fiveDayForecast = document.querySelector(".fiveDayForecast")
 
 // call function to create elements
 var createItem = function (element, className) {
@@ -68,8 +69,46 @@ var getWeather = function() {
                     }
                 userInput.value = ""
 
-
+                fiveDay()
             })
         }
     })
+}
+
+// fiveday forecast functions
+var fiveDay = function() {
+    fiveDayForecast.innerHTML = "";
+
+    for (var i = 0; i <6; i++) {
+        var forecastDate = new Date(daily[i].dt * 1000).toLocaleDateString({weekday: "long", year: "numeric", month: "numeric"})
+        var temp = "Temp: " + Math.round(daily[i].temp["max"]) + "\u00B0" + "F"
+        var wind = "Wind: " + Math.round(daily[i].wind_speed) + "mph";
+        var humidity = "Humidity: " + Math.round(daily[i].humidity) + "%";
+
+        var icon = daily[i].weather[0]["icon"];
+        var iconUrl = "https://openweathermap.org/img/wn/" + icon + ".png";
+
+        // create elements to appendChild
+        var divEl = createItem("div", "col-xs divCard fiveDayClass");
+        var dayDate = createItem("h5", "dayDate");
+        dayDate.innerHTML = forecastDate;
+        var iconImg = createItem("img", "iconImg");
+        iconImg.setAttribute("src", iconUrl);
+        iconImg.style.width = "20px";
+        var ulListEl = createItem("ul", "ulList");
+        ulListEl.style.listStyle = "none";
+        ulListEl.style.paddingLeft = "0px";
+        var listItemA = createItem("li", "listItem");
+        listItemA.innerHTML = temp;
+        var listItemB = createItem("li", "listItem");
+        listItemB.innerHTML = wind;
+        var listItemC = createItem("li", "listItem");
+        listItemC.innerHTML = humidity;
+
+        fiveDayForecast.appendChild(divEl);
+        divEl.appendChild(dayDate);
+        divEl.appendChild(iconImg);
+        divEl.appendChild(ulListEl);
+        ulListEl.append(listItemA, listItemB, listItemC);
+    }
 }
