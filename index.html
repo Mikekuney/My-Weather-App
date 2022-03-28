@@ -16,13 +16,40 @@
     <main class="row">
         <!-- search form input -->
         <div class="search-form">
+            <div class="col-12">
             <h2>Search for a City:</h2>
-            <form>
-                <label for="input">
-                    <input type="text" id="userInput" placeholder="Jacksonville"
-                </label>
-            </form>
+                <form>
+                    <label for="input">
+                        <input type="text" id="userInput" placeholder="Jacksonville">
+                    </label>
+                    <button type="submit" id="searchBtn" class="btn btn-primary">Search</button>
+                </form>
+                <div class="previous-searches">
+
+                </div>
+            </div>
+        </div>
+        <div class="col-8 city-name">
+            <div class="current-city">
+                <div class="city-date">
+                    <h2 id="name"></h2>
+                    <img id="currentIcon">
+                </div>
+                <ul>
+                    <li id="temp"></li>
+                    <li id="wind"></li>
+                    <li id="humidity"></li>
+                    <li id="uvi"></li>
+                </ul>
+            </div>
+            <h3>5-Day Forecast</h3>
+            <div class="col-xsm row fiveDayForecast">
+                <!-- created within js -->
+            </div>
         </div>
     </main>
+    <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="./assets/js/script.js"></script>
 </body>
 </html>
