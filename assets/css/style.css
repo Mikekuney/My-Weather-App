@@ -25,3 +25,53 @@
 .form {
     margin: 3px;
 }
+
+/* current-city style */
+.current-city {
+    width: 100%;
+    padding-left: 10px;
+}
+
+.current-city ul {
+    list-style: none;
+    padding-left: 0px;
+}
+
+.current-date {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+/* 5day forecast style */
+.fiveDayForecast {
+    background-color: rgb(18, 18, 119);
+    color: white;
+    padding: 5px 15px 15px 2px;
+    margin: 0 0 10px 10px;
+}
+
+.row {
+    margin-left: 10px
+}
+
+/* color coding indicator for uvi section */
+.uvi-low {
+    background-color: rgb(79, 233, 79);
+    border-radius: 10%;
+}
+
+.uvi-moderate {
+    background-color: rgb(240, 225, 16);
+    border-radius: 10%;
+}
+
+.uvi-high {
+    background-color: rgb(243, 112, 6);
+    border-radius: 10%;
+}
+
+.uvi-very-high {
+    background-color: rgb(247, 4, 97);
+    border-radius: 10%;
+}
