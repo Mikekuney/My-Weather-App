@@ -1,11 +1,24 @@
-//var apiKey1 = ea9abd5092bfe7b22130b951bffc64cf
+//var apiKey1 = ea9abd5092bfe7b22130b95 1bffc64cf
 //var myApiKey = apiKey1
 var userInput = document.querySelector("#userInput")
+var searchBtn = document.querySelector("#searchBtn")
 var temp = document.querySelector("#temp")
 var wind = document.querySelector("#wind")
 var humidity = document.querySelector("#humidity")
 var uvi = document.querySelector("#uvi")
 var fiveDayForecast = document.querySelector(".fiveDayForecast")
+var cityName = document.querySelector("#name")
+var previous = document.querySelector(".previous-searches")
+
+// global var 
+var lat;
+var lon;
+var search;
+var preSearch;
+var previousBtnEl;
+var todayDate = new Date().toLocaleDateString('en-us', { year: "numeric", month: "numeric", day: "numeric"});
+var today = todayDate;
+var daily;
 
 // call function to create elements
 var createItem = function (element, className) {
@@ -28,7 +41,7 @@ var getLonLat = function (event) {
             response.json().then(function (data) {
                 lon = data.coord.lon
                 lat = data.coord.lat
-                console.log(lat, lonS)
+                console.log(lat, lon)
                 getWeather();
                 previousSearches();
             })
@@ -112,3 +125,47 @@ var fiveDay = function() {
         ulListEl.append(listItemA, listItemB, listItemC);
     }
 }
+
+var previousSearches = function() {
+
+    var getSearches = JSON.parse(localStorage.getItem("searches")) || [];
+    if(userInput.value != "") {
+        getSearches.push(userInput.value);
+    }
+    var saveSearches = localStorage.setItem("searches", JSON.stringify(getSearches))
+    previous.innerHTML = "";
+
+    for (var i = 0; i < getSearches.length; i++) {
+        previousBtnEl = createItem("button", "btn btn-secondary previousList");
+        search = getSearches[i];
+        previousBtnEl.innerHTML = search;
+        previousBtnEl.setAttribute("cityName", search);
+        $(previous).append(previousBtnEl);
+    }
+};
+
+// search history functions
+function searchHistory(e) {
+
+    var button = e.target;
+    preSearch = button.getAttribute("cityName");
+    userInput.value = preSearch;
+
+    var userInputEl = preSearch;
+    var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + userInputEl + "&units=imperial&APPID=ea9abd5092bfe7b22130b951bffc64cf"
+    fetch(apiUrl).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (data) {
+                lon = data.coord.lon
+                lat = data.coord.lat
+
+                getWeather();
+            })
+        }
+    })
+};
+
+document.onload = previousSearches()
+
+searchBtn.addEventListener("click", getLonLat)
+previous.addEventListener("click", searchHistory)
