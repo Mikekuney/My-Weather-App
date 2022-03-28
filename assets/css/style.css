@@ -23,7 +23,7 @@
 }
 
 .form {
-    margin: 3px;
+    margin: 6px;
 }
 
 /* current-city style */
@@ -33,22 +33,24 @@
 }
 
 .current-city ul {
+    justify-content: center;
     list-style: none;
     padding-left: 0px;
 }
 
 .current-date {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-evenly;
     width: 100%;
 }
 
-/* 5day forecast style */
+/* 5day forecast style */  
 .fiveDayForecast {
     background-color: rgb(18, 18, 119);
     color: white;
     padding: 5px 15px 15px 2px;
     margin: 0 0 10px 10px;
+    justify-content: center;
 }
 
 .row {

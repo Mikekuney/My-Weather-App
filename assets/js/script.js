@@ -1,14 +1,17 @@
 //var apiKey1 = ea9abd5092bfe7b22130b95 1bffc64cf
 //var myApiKey = apiKey1
+var header = document.querySelector(".header")
 var userInput = document.querySelector("#userInput")
 var searchBtn = document.querySelector("#searchBtn")
 var temp = document.querySelector("#temp")
 var wind = document.querySelector("#wind")
 var humidity = document.querySelector("#humidity")
 var uvi = document.querySelector("#uvi")
+var currentCity = document.querySelector(".currentCity")
 var fiveDayForecast = document.querySelector(".fiveDayForecast")
 var cityName = document.querySelector("#name")
 var previous = document.querySelector(".previous-searches")
+var currentIcon = document.querySelector("#currentIcon")
 
 // global var 
 var lat;
@@ -102,7 +105,7 @@ var fiveDay = function() {
         var iconUrl = "https://openweathermap.org/img/wn/" + icon + ".png";
 
         // create elements to appendChild
-        var divEl = createItem("div", "col-xs divCard fiveDayClass");
+        var divEl = createItem("div", "col-xs divCard fiveDayForecast");
         var dayDate = createItem("h5", "dayDate");
         dayDate.innerHTML = forecastDate;
         var iconImg = createItem("img", "iconImg");
